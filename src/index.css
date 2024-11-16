@@ -9,20 +9,24 @@
 }
 
 header {
-  padding: 0.5em;
+  /* padding: 0.5em; */
+  display: flex;
+
   background-color: rgb(148, 148, 243);
   color: rgb(66, 32, 8);
 }
 
 h1 {
   font-size: 1.5em;
+  align-content: center;
+  padding: 0.5em;
 }
 
 nav {
-  padding: 0.5em;
+  padding: 0.5em 1.5em;
   background-color: #122;
   color: rgb(148, 148, 243);
-
+  flex: 1;
   display: flex;
 
   align-items: baseline;
