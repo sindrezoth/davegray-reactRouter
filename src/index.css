@@ -1,0 +1,197 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* outline: 1px solid red; */
+
+  font-size: 22px;
+  font-family: 'Poppins', sans-serif;
+}
+
+header {
+  padding: 0.5em;
+  background-color: rgb(148, 148, 243);
+  color: rgb(66, 32, 8);
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+nav {
+  padding: 0.5em;
+  background-color: #122;
+  color: rgb(148, 148, 243);
+
+  display: flex;
+
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+nav form {
+  padding: 0.25em 0em;
+}
+nav form label {
+  position: absolute;
+  /* left: 99999px; */
+  visibility: hidden;
+  font-size: 1.2em;
+  margin-right: 0.5em;
+}
+
+nav form input {
+  padding: 0.3em;
+
+  border-radius: 8px;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  padding: 0.25em 0;
+}
+
+nav a {
+  color: #a9a;
+  margin: 1em 1.5em;
+
+  text-decoration: none;
+}
+
+a:visited {
+  color: #a9a;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+/* body {
+  width: 100%;
+  height: 100vh; */
+/* } */
+
+main {
+  flex: 1;
+}
+
+main.home {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+article {
+  padding: 1em;
+}
+
+article a h3 {
+  font-size: 1.2em;
+  color: #122;
+}
+
+article a {
+  color: #122;
+  text-decoration: none;
+}
+
+article a p {
+  font-size: 0.6em;
+  width: 100%;
+  margin-right: 2em;
+}
+
+article p {
+  padding: 0.5em 0;
+}
+
+article button {
+  padding: 0.2em 1em;
+}
+
+article.post {
+  border: lightgrey solid 1px;
+  margin-bottom: 1em;
+  min-width: 400px;
+}
+
+main.new-post {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 1em 2em;
+}
+
+.new-post-form h2 {
+  margin-bottom: 2em;
+}
+
+.new-post-form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-post-form label {
+  font-size: 0.8em;
+  text-transform: lowercase;
+}
+
+.new-post-form input,
+.new-post-form textarea {
+  border: 2px solid darkgrey;
+  padding: 0.25em;
+  border-radius: 4px;
+  transition: 0.1s linear;
+  margin-bottom: 1em;
+}
+
+.new-post-form input:hover,
+.new-post-form textarea:hover,
+.new-post-form button:hover,
+.new-post-form input:active,
+.new-post-form textarea:active,
+.new-post-form button:active,
+.new-post-form input:focus,
+.new-post-form textarea:focus,
+.new-post-form button:focus {
+  border: 2px solid darkslategrey;
+}
+
+.new-post-form textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+.new-post-form button {
+  padding: 0.25em 1em;
+  border-radius: 4px;
+}
+
+footer {
+  background-color: #a9a;
+  padding: 0.5em;
+}
+
+.post-page {
+  display: flex;
+  justify-content: center;
+}
+
+.post-page article {
+  width: 40%;
+}
+
+.post-page h2 {
+  font-size: 1.2em;
+}
+
+.post-page .datetime {
+  font-size: 0.8em;
+}
