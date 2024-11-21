@@ -1,7 +1,39 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
+import api from '../api/posts';
+import DataContext from '../context/DataContext';
 
-const NewPost = ({ postTitle, setPostTitle, postBody, setPostBody, handleSubmitNewPost }) => {
+const NewPost = () => {
+  const { posts, setPosts } = useContext(DataContext);
   const inputRef = useRef();
+  const [postTitle, setPostTitle] = useState('');
+  const [postBody, setPostBody] = useState('');
+  const navigate = useNavigate();
+
+  function handleSubmitNewPost(e) {
+    const newPost = {
+      id: (posts.reduce((max, { id }) => (id > max ? id : max), 0) + 1)+'',
+      title: postTitle,
+      body: postBody,
+      datetime: format(new Date(), 'MMMM dd, yyyy pp'),
+    };
+
+    (async () => {
+      try {
+        const response = await api.post('/posts', newPost);
+        console.log(response);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+
+    setPosts((prev) => [...prev, newPost]);
+
+    setPostTitle('');
+    setPostBody('');
+    navigate('/');
+  }
 
   useEffect(() => {
     inputRef.current.focus();

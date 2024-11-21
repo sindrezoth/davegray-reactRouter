@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Feed from './Feed';
+import DataContext from '../context/DataContext';
 
-const Home = ({ posts, isLoading, error }) => {
+const Home = () => {
+  const { posts, isLoading, error, searchResults } = useContext(DataContext);
+
   return (
     <main className="home">
       {isLoading ? (
@@ -9,7 +12,7 @@ const Home = ({ posts, isLoading, error }) => {
       ) : error ? (
         <p>{error}</p>
       ) : posts && posts.length ? (
-        <Feed posts={posts} />
+        <Feed posts={searchResults || posts} />
       ) : (
         <p>No posts to display.</p>
       )}

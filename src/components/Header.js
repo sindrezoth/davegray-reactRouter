@@ -1,14 +1,20 @@
-import React from 'react';
 import Nav from './Nav';
+import React, { useContext } from 'react';
 import { FaLaptop, FaTabletAlt, FaMobileAlt } from 'react-icons/fa';
+import useWindowSize from '../hooks/useWindowSize';
+import { Link } from 'react-router-dom';
 
-const Header = ({ title, screenWidth, search, setSearch }) => {
+const Header = () => {
+  const { width } = useWindowSize();
+
   return (
     <header>
-      <h1>{title}</h1>
-      {screenWidth < 768 ? <FaMobileAlt /> : screenWidth < 992 ? <FaTabletAlt /> : <FaLaptop />}
+      <Link to="/">
+        <h1 style={{color: '#111'}}>ReactJS Blog</h1>
+      </Link>
+      {width < 768 ? <FaMobileAlt /> : width < 992 ? <FaTabletAlt /> : <FaLaptop />}
 
-      {Nav && <Nav search={search} setSearch={setSearch} />}
+      {Nav && <Nav />}
     </header>
   );
 };
