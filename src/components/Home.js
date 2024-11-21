@@ -1,10 +1,18 @@
 import React from 'react';
 import Feed from './Feed';
 
-const Home = ({ posts }) => {
+const Home = ({ posts, isLoading, error }) => {
   return (
     <main className="home">
-      {posts && posts.length ? <Feed posts={posts} /> : <p>No posts to display.</p>}
+      {isLoading ? (
+        <p>loading...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : posts && posts.length ? (
+        <Feed posts={posts} />
+      ) : (
+        <p>No posts to display.</p>
+      )}
     </main>
   );
 };

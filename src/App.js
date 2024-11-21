@@ -12,6 +12,9 @@ import PostPage from './components/PostPage';
 import About from './components/About';
 import Missing from './components/Missing';
 
+import useWindowSize from './hooks/useWindowSize';
+import useFetch from './hooks/useFetch';
+
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState('');
@@ -22,25 +25,12 @@ const App = () => {
   const [editBody, setEditBody] = useState('');
   const navigate = useNavigate();
 
+  const windowSize = useWindowSize();
+  const { data, isLoading, error } = useFetch('http://localhost:3500/posts');
+
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await api.get('/posts');
-
-        setPosts(response.data);
-      } catch (err) {
-        if (err.response) {
-          console.error(err.response.data);
-          console.log(err.response.status);
-          console.log(err.response.headers);
-        } else {
-          console.error(err);
-        }
-      }
-    };
-
-    fetchPosts();
-  }, []);
+    setPosts(data);
+  }, [data]);
 
   function handleSubmitNewPost(e) {
     const newPost = {
@@ -72,6 +62,7 @@ const App = () => {
     console.log(id);
     const newPost = {
       id: id,
+
       body: editBody,
       title: editTitle,
       datetime: format(new Date(), 'MMMM dd, yyyy pp'),
@@ -80,24 +71,13 @@ const App = () => {
     api
       .put(`/posts/${id}`, newPost)
       .then((res) => {
-        setPosts((prev) => [...prev].map(post => post.id === id ? newPost : post));
+        setPosts((prev) => [...prev].map((post) => (post.id === id ? newPost : post)));
         console.log(res);
         navigate(`/post/${id}`);
       })
       .catch((err) => {
         console.error(err);
       });
-    //-------------------
-    // (async () => {
-    //   try {
-    //     const response = await
-
-    //     console.log(response);
-
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // })();
   }
 
   function handleDelete(id) {
@@ -115,21 +95,21 @@ const App = () => {
   }
 
   useEffect(() => {
-    const filteredResults = posts.filter(
+    const filteredResults = posts && posts.filter(
       (post) =>
         post.body.toLowerCase().includes(search.toLowerCase()) ||
         post.title.toLowerCase().includes(search.toLowerCase()),
     );
 
-    setSearchResults(filteredResults.reverse());
+    setSearchResults(filteredResults?.reverse());
   }, [posts, search]);
 
   const title = 'ReactJS Blog';
   return (
     <div className="main-container">
-      <Header title={title} search={search} setSearch={setSearch} />
+      <Header title={title} screenWidth={windowSize.width} search={search} setSearch={setSearch} />
       <Routes>
-        <Route exact path="/" element={<Home posts={searchResults} />} />
+        <Route exact path="/" element={<Home isLoading={isLoading} error={error} posts={searchResults} />} />
         <Route
           exact
           path="/post"
