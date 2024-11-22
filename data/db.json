@@ -2,27 +2,15 @@
   "posts": [
     {
       "id": "1",
-      "title": "First",
-      "body": "post ",
-      "datetime": "November 22, 2024 1:00:02 AM"
+      "body": "post edited",
+      "title": "first ",
+      "datetime": "November 22, 2024 7:50:36 PM"
     },
     {
-      "id": "11",
-      "body": "Here some shit",
-      "title": "Second Shit",
-      "datetime": "November 22, 2024 1:04:28 AM"
-    },
-    {
-      "id": "111",
-      "body": "What you're gonna find how to eddititng",
-      "title": "Third",
-      "datetime": "November 22, 2024 1:04:14 AM"
-    },
-    {
-      "id": "1111",
-      "title": "Finally",
-      "body": "hello good night",
-      "datetime": "November 22, 2024 1:10:50 AM"
+      "id": "2",
+      "title": "Another",
+      "body": "Here my thouthts",
+      "datetime": "November 22, 2024 7:50:20 PM"
     }
   ]
 }

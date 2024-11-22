@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import api from '../api/posts';
 import DataContext from '../context/DataContext';
@@ -10,16 +10,18 @@ const EditPost = () => {
   const [editBody, setEditBody] = useState('');
   const inputRef = useRef();
   const { id } = useParams();
+  
   const navigate = useNavigate();
 
   useEffect(() => {
     inputRef.current.focus();
-  }, []);
+
+    const post = posts.find((post) => post.id === id);
+    setEditTitle(post.title);
+    setEditBody(post.body);
+  }, [id, posts]);
 
   function handleEdit(id) {
-    const currentPost = posts.find((post) => post.id === id);
-
-    console.log(id);
     const newPost = {
       id: id,
 
@@ -40,20 +42,13 @@ const EditPost = () => {
       });
   }
 
-  const post = posts.find((post) => post.id === id);
-  console.log(post);
-  useEffect(() => {
-    setEditTitle(post.title);
-    setEditBody(post.body);
-  }, []);
-
   return (
     <main className="new-post">
       <form
         className="new-post-form"
         onSubmit={(e) => {
           e.preventDefault();
-          handleEdit(post.id);
+          handleEdit(id);
         }}>
         <h2>Edit post</h2>
         <label htmlFor="post-title">Title:</label>

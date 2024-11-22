@@ -13,7 +13,7 @@ const NewPost = () => {
 
   function handleSubmitNewPost(e) {
     const newPost = {
-      id: (posts.reduce((max, { id }) => (id > max ? id : max), 0) + 1)+'',
+      id: ((posts.length ? posts.reduce((max, { id }) => (+id > max ? +id : max), -1): 0) + 1)+'',
       title: postTitle,
       body: postBody,
       datetime: format(new Date(), 'MMMM dd, yyyy pp'),

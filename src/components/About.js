@@ -6,7 +6,7 @@ const About = () => {
       <p>
         {' '}
         This is result of the tutorial by{' '}
-        <a href="https://youtube.com/@davegrayteachescode" target="_blank">Dave Gray</a>
+        <a href="https://youtube.com/@davegrayteachescode" target="_blank" rel="noreferrer">Dave Gray</a>
       </p>
     </main>
   );
