@@ -1,7 +1,32 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useStoreState, useStoreActions } from 'easy-peasy';
+import { format } from 'date-fns';
 
-const NewPost = ({ postTitle, setPostTitle, postBody, setPostBody, handleSubmitNewPost }) => {
+const NewPost = () => {
+  const posts = useStoreState(state => state.posts);
+  const postTitle = useStoreState(state => state.postTitle);
+  const postBody = useStoreState(state => state.postBody);
+  const setPostTitle = useStoreActions(actions => actions.setPostTitle);
+  const setPostBody = useStoreActions(actions => actions.setPostBody);
+  const navigate = useNavigate();
+
+  const savePost = useStoreActions(actions => actions.savePost);
+
   const inputRef = useRef();
+
+  function handleSubmitNewPost(e) {
+    e.preventDefault();
+    const newPost = {
+      id: ''+(posts.reduce((max, { id }) => (+id > max ? +id : max), 0) + 1),
+      title: postTitle,
+      body: postBody,
+      datetime: format(new Date(), 'MMMM dd, yyyy pp'),
+    };
+
+    savePost(newPost);
+    navigate('/');
+  }
 
   useEffect(() => {
     inputRef.current.focus();

@@ -223,6 +223,11 @@ svg {
   margin-bottom: 2em;
 }
 
+header a h1{
+  color: #111;
+  text-decoration: none;
+}
+
 /* .about {
   display: ;
 } */
